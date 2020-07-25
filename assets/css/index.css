@@ -1,0 +1,56 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: auto;
+    min-height: 25%;
+    justify-content: space-around;
+    /* border: 1px solid; */
+    background: linear-gradient(45deg, black, transparent);
+    color: white;
+    box-shadow: 1px 1px black;
+    margin-top:10% ;
+}
+.header{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 5px;
+    border-bottom: 1px solid wheat;
+}
+.inputElement{
+    margin: auto;
+}
+.inputElement label{
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 5px;
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+}
+
+.inputElement input{
+    padding: 0px 5px;
+}
+.submit{
+    width: 100px;
+
+    margin: 15px 40px;
+    padding: 5px;
+    font-size: 1.2em;
+    border-radius: 0.8em;
+    
+}
+.options{
+    width: fit-content;
+    align-self: flex-end;
+}
+.submit a{
+    text-transform: inherit;
+    text-decoration: unset;
+    color: inherit;
+}
+.hide{
+    display: none;
+}

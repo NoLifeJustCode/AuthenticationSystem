@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title></title>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <link rel="stylesheet" href="../assets/css/index.css">
+    </head>
+    
+    <body>
+        <div id="flash" style="visibility: hidden; position: absolute;" type="error" message="<%=messages.error%>"></div>
+        <form action="/unAuth/Login" method="POST" class="form">
+           <div class="header">Login</div>
+            <div class="inputElement">
+                <label for="email" >Email</label>
+                <input type="email" name="email" id="email"/>
+            </div>
+            <div class="inputElement">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password"/>
+            </div>
+            <div class="options">
+            <input type="submit" class="submit" value="Login">
+            <button class="submit"><a href="/unAuth/signup">Register</a></button>
+            <button id="forgot-password" class="submit" style="width: max-content; margin: auto;"> Forgot password</button>
+            </div>
+
+            
+        </form>
+        
+        <form action="/unAuth/forgot-password" method="GET" id="forgot-form" class="hide form" style="top: 0; margin-top: 0;">
+            <div class="inputElement">
+            <input type="email" name="email"  placeholder="Enter your registerd email">
+            </div>
+            <input type="submit" value="submit" class="submit">
+         </form>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="../assets/js/index.js"></script>
+    </body>
+</html>

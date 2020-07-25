@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title></title>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <link rel="stylesheet" href="../assets/css/index.css">
+    </head>
+    
+    <body>
+        <%=JSON.stringify(locals)%>
+        <div id="flash" style="visibility: hidden; position: absolute;" type="error" message="<%=messages.error%>"></div>
+        <form action="/unAuth/signup" method="POST" class="form">
+           <div class="header">signup</div>
+           <div class="inputElement">
+            <label for="name">Name</label>
+            <input type="name" name="name" id="name"/>
+            </div> 
+           <div class="inputElement">
+                <label for="email" >Email</label>
+                <input type="email" name="email" id="email"/>
+            </div>
+            <div class="inputElement">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password"/>
+            </div>
+
+            <div class="options">
+                <input type="submit" class="submit" value="Signup">
+                <button class="submit"><a href="/unAuth/login">Login</a></button>
+                </div>
+        </form>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="../assets/js/index.js"></script>
+    </body>
+</html>

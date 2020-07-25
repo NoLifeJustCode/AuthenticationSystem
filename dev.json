@@ -1,0 +1,10 @@
+{
+    "email":{
+        "id":"",
+        "password":""
+    },
+    "dbhost":"mongodb://localhost:27017/AuthenticationSystem",
+    "Port":3000
+
+
+}
