@@ -3,6 +3,10 @@
         "id":"",
         "password":""
     },
+    "recaptcha":{
+        "sitekey":"",
+        "secretkey":""
+    },
     "dbhost":"mongodb://localhost:27017/AuthenticationSystem",
     "Port":3000
 

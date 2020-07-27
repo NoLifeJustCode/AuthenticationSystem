@@ -7,7 +7,7 @@
     </head>
     
     <body>
-        <%=JSON.stringify(locals)%>
+    
         <div id="flash" style="visibility: hidden; position: absolute;" type="error" message="<%=messages.error%>"></div>
         <form action="/unAuth/signup" method="POST" class="form">
            <div class="header">signup</div>
@@ -23,7 +23,8 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password"/>
             </div>
-
+            <input type="hidden" id="captcha" name="captcha" >
+            <input type="hidden" id="sitekey" value="<%=sitekey%>">
             <div class="options">
                 <input type="submit" class="submit" value="Signup">
                 <button class="submit"><a href="/unAuth/login">Login</a></button>
@@ -31,5 +32,6 @@
         </form>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
         <script src="../assets/js/index.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render=<%=sitekey%>"></script>
     </body>
 </html>

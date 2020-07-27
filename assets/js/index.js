@@ -21,4 +21,13 @@ window.onload=(e)=>{
             document.getElementById('forgot-form').classList.remove('hide');
         })
     }
+    let sitekey=document.getElementById('sitekey').value
+    if(grecaptcha){
+        grecaptcha.ready(function(){
+            grecaptcha.execute(sitekey,{action:'demo'}).then(token=>{
+                console.log(token)
+                document.getElementById('captcha').value=token;
+            })
+        })
+    }
 }

@@ -8,7 +8,7 @@
     
     <body>
         <div id="flash" style="visibility: hidden; position: absolute;" type="error" message="<%=messages.error%>"></div>
-        <form action="/unAuth/Login" method="POST" class="form">
+        <form action="/unAuth/Login" method="POST" class="form" >
            <div class="header">Login</div>
             <div class="inputElement">
                 <label for="email" >Email</label>
@@ -18,9 +18,12 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password"/>
             </div>
+            <input type="hidden" id="captcha" name="captcha">
+            <input type="hidden" id="sitekey" value="<%=sitekey%>">
             <div class="options">
-            <input type="submit" class="submit" value="Login">
-            <button class="submit"><a href="/unAuth/signup">Register</a></button>
+          
+            <input type="submit" class="submit" value="Login " id="login">
+            <button class="submit" ><a href="/unAuth/signup">Register</a></button>
             <button id="forgot-password" class="submit" style="width: max-content; margin: auto;"> Forgot password</button>
             </div>
 
@@ -35,5 +38,6 @@
          </form>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
         <script src="../assets/js/index.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render=<%=sitekey%>"></script>
     </body>
 </html>

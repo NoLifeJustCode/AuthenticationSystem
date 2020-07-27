@@ -3,12 +3,29 @@ const crypto=require('crypto')
 const mailer=require('../config/nodemailerConfig')
 const Token=require('../models/Token')
 const bcrypt=require('bcrypt')
-const email=require('../dev.json')
+const email=require('../dev.json').email
+//console.log(email)
+const fetch=require('node-fetch')
 //const configKue=require('../config/configKue')
 const senderMail=''
+const Recaptcha=require('express-recaptcha').RecaptchaV3
+const {sitekey,secretkey}=require('../dev.json').recaptcha;
+
+const recpatch=new Recaptcha(sitekey,secretkey)
 // controller to handle signup
+async function validateCaptcha(captcha){
+    const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secretkey}&response=${captcha}`
+    return await fetch(url,{method:'POST'}).then(response=>response.json()).then(json=>{
+       // console.log(json)
+        return json.success&&json.score>0.6;
+    })
+}
 module.exports.signUp=async(req,res)=>{
     try{ 
+        let captcha=req.body.captcha
+        let j=await validateCaptcha(captcha)
+        if(!j)
+        throw new Error('Captcha Validation failed')
         let data={
             email:req.body.email,
             name:req.body.name,
@@ -27,7 +44,8 @@ module.exports.signUp=async(req,res)=>{
         // });
         return res.redirect('/unAuth/Login');
     }catch(e){
-        if(e.message=='Invalid data')
+        //console.log(e.message)
+        if(e.message=='Invalid data'||e.message=='Captcha Validation failed')
             req.flash('error',e.message);
         else
             req.flash('error', 'User email already exists')
@@ -35,13 +53,20 @@ module.exports.signUp=async(req,res)=>{
     }
 
 }
-
+module.exports.LoginMiddleware=async(req,res,next)=>{
+   // console.log(req.body)
+    if(!await validateCaptcha(req.body.captcha)){
+        req.flash('error','captcha validation failed')
+        return res.redirect('back')
+    }
+    next();
+}
 module.exports.renderSignUp=async(req,res)=>{
-    return res.render('signup');
+    return res.render('signup',{sitekey:sitekey});
 }
 
 module.exports.renderLogin=(req,res)=>{
-    return res.render('login');
+    return res.render('login',{sitekey:sitekey});
 }
 // generate auto expiring link
 module.exports.forgotPassword=async(req,res)=>{
@@ -61,11 +86,11 @@ module.exports.forgotPassword=async(req,res)=>{
         from: email.id,
         to: user.email,
         subject: 'Reset Password Link',
-        text: `http://localhost:3000/unAuth/resetPassword/${user.forgottenPasswordLink}/${token.token}</br>Link expires in 1 minute`
+        text: `http://localhost:3000/unAuth/resetPassword/${user.forgottenPasswordLink}/${token.token}\nLink expires in 1 minute`
       };
     mailer.sendMail(mailOptions, function(error, info){
         if (error) {
-          console.log(error);
+          console.log(error.message);
         } else {
           console.log('Email sent: ' + info.response);
         }
@@ -132,12 +157,15 @@ module.exports.updatePassword=async(req,res)=>{
         req.flash('success','Password update successfull');
         // remove token to avoid reuse
         Token.findByIdAndRemove(user.forgottenPasswordLink,(err,doc)=>{
-            console.log(err)
+            if(err)
+                 console.log(err.message)
+
         });
         // logout to signin again
         req.logOut()
         return res.redirect('/unAuth/login');
     }catch(e){
+       // console.log(e)
         req.flash('error',e.message)
         return res.redirect('/unAuth/login')
     }

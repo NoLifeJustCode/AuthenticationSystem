@@ -33,7 +33,7 @@ app.set('views' ,'./views');
 app.use('/',require('./routes/index'))
 
 app.listen(3000,function(req,res){
-    console.log(req,res);
+  
     console.log('server running');
 })
 
@@ -55,7 +55,7 @@ async function getUser(email,password){
             }
         return false
     }catch(e){
-        console.log(e)
+       
         throw e;   
     }
 }

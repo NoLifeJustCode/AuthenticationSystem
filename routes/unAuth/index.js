@@ -8,7 +8,7 @@ Router.get('/Login',AuthController.renderLogin);
 //signup handler
 Router.post('/signUp',AuthController.signUp);
 //login handler
-Router.post('/login',passport.authenticate('UserAuth',{
+Router.post('/login',AuthController.LoginMiddleware,passport.authenticate('UserAuth',{
     successRedirect:'/Auth/',
     successFlash:'Login SuccessFull',
     failureRedirect:'back',
