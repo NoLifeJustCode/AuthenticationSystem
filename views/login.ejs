@@ -7,7 +7,12 @@
     </head>
     
     <body>
-        <div id="flash" style="visibility: hidden; position: absolute;" type="error" message="<%=messages.error%>"></div>
+        
+        <%if(messages.error){%>
+        <div id="flash-error" style="visibility: hidden; position: absolute;" type="error" message="<%=messages.error%>"></div>
+        <%}else{%>
+        <div id="flash-success" style="visibility: hidden; position: absolute;" type="success" message="<%=messages.success%>"></div>
+        <%}%>
         <form action="/unAuth/Login" method="POST" class="form" >
            <div class="header">Login</div>
             <div class="inputElement">

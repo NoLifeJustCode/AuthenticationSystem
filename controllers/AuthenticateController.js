@@ -18,6 +18,9 @@ async function validateCaptcha(captcha){
     return await fetch(url,{method:'POST'}).then(response=>response.json()).then(json=>{
        // console.log(json)
         return json.success&&json.score>0.6;
+    }).catch(e=>{
+        req.flash("error",e.message)
+        return false;
     })
 }
 module.exports.signUp=async(req,res)=>{
@@ -42,6 +45,7 @@ module.exports.signUp=async(req,res)=>{
         //     subject:'Sign Up successful',
         //     text:`<h3>${user.name} has successfull signed up using this email<h3>`
         // });
+        req.flash('success',"login success")
         return res.redirect('/unAuth/Login');
     }catch(e){
         //console.log(e.message)
@@ -166,6 +170,7 @@ module.exports.updatePassword=async(req,res)=>{
 
         });
         // logout to signin again
+        req.flash("success","password updated please relogin")
         req.logOut()
         return res.redirect('/unAuth/login');
     }catch(e){

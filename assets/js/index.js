@@ -4,7 +4,12 @@ let options={
 }
 let n=new Noty(options);
 function flash(){
-    let flash=document.getElementById('flash');
+    let flash=document.getElementById('flash-error');
+    
+    if(!flash)
+        {
+            flash=document.getElementById('flash-success')
+        }
     if(flash.getAttribute('message')=='')
         return;
     n.setText(flash.getAttribute('message'),true);
@@ -22,7 +27,7 @@ window.onload=(e)=>{
         })
     }
     let sitekey=document.getElementById('sitekey').value
-    if(grecaptcha){
+    if(sitekey&&grecaptcha){
         grecaptcha.ready(function(){
             grecaptcha.execute(sitekey,{action:'demo'}).then(token=>{
                 console.log(token)
