@@ -3,8 +3,9 @@ const crypto=require('crypto')
 const mailer=require('../config/nodemailerConfig')
 const Token=require('../models/Token')
 const bcrypt=require('bcrypt')
+
 const email=require('../dev.json').email
-//console.log(email)
+console.log(email)
 const fetch=require('node-fetch')
 //const configKue=require('../config/configKue')
 const senderMail=''

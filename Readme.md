@@ -10,7 +10,7 @@
   *  Project Directory and Structure
   */
   1.models
-        contains all the model Schema connected to HospitalAPI Database
+        contains all the model Schema connected to AuthenticationSystem Database
         Schemas contained:
            User Schema: contains User related info
            Token :contains auto expiring token
