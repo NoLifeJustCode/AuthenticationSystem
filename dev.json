@@ -1,11 +1,11 @@
 {
     "email":{
-        "id":"",
-        "password":""
+        "id":"saravananr728@gmail.com",
+        "password":"djvrzbuskkwbbkfe"
     },
     "recaptcha":{
-        "sitekey":"",
-        "secretkey":""
+        "sitekey":"6LcALLcZAAAAALlpr1ugmXMc60BRo3wITznooAJU",
+        "secretkey":"6LcALLcZAAAAAFLslxj9UsrKa--HVAELcmyaNfhq"
     },
     "dbhost":"mongodb://localhost:27017/AuthenticationSystem",
     "Port":3000

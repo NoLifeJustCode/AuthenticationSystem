@@ -79,6 +79,10 @@ module.exports.forgotPassword=async(req,res)=>{
     // check if user exist
     if(!user)
         throw new Error('User doesn\'t exit' );
+    if(await Token.findById(user.forgottenPasswordLink))
+        {
+            return res.send('Reset Link already sent')
+        }
     let token=await Token.create({user:user.id});
     user=await User.findByIdAndUpdate(user.id,{forgottenPasswordLink:token.id},{new :true});
    
